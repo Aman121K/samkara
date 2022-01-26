@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1093501519299",
+    "project_id": "samkara-8b267",
+    "storage_bucket": "samkara-8b267.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093501519299:android:dec6255b3ecbbd2cc12976",
+        "android_client_info": {
+          "package_name": "com.samskara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093501519299-1pca1d19m9pddp1rmllhb902lkvvk3uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVPjXOLH8geCpf_51C6JzROqogn3agYjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093501519299-1pca1d19m9pddp1rmllhb902lkvvk3uq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

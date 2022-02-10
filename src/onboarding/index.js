@@ -171,11 +171,12 @@ const Onboarding = ({ navigation }) => {
             }}>
                 <View style={{
                     alignItems: 'center',
-                    marginVertical: SIZES.base * 2
+                    marginVertical: SIZES.base * 3
                 }}>
                     <ImageBackground
+                    resizeMode="contain"
                         source={item.img}
-                        style={{ height:290,width:330}}
+                        style={{ height:400,width:330}}
                     />
                 </View>
                 <View style={{ paddingHorizontal: SIZES.base * 2, marginVertical: SIZES.base * 2 }}>

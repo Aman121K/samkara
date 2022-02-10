@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground, Image, TextInput ,KeyboardAvoidingView} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, ImageBackground, Image, TextInput ,KeyboardAvoidingView,TouchableOpacity} from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler'
 import styles from './style'
 import testSvg from '../../../assets/loginbackground.svg';
 import path from '../../../constants/imagePath';

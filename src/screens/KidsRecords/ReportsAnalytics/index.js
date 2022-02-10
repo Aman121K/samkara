@@ -14,7 +14,7 @@ const ReportsAnalytics = ({navigation}) => {
        <ScrollView style={{marginTop:heightPercentageToDP('-120%')}}>
         <View>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                <TouchableOpacity style={{alignSelf:'center'}}>
+                <TouchableOpacity style={{alignSelf:'center'}} onPress={()=>navigation.goBack()}>
                 <Image source={Path.Backbutton} style={{alignSelf:'center',marginLeft:10}}></Image>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>

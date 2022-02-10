@@ -1,8 +1,8 @@
 
 
 import React, { useState } from 'react'
-import { View, Text, Image,FlatList,ScrollView } from 'react-native'
-import {  TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, Image,FlatList,ScrollView,TouchableOpacity } from 'react-native'
+// import {  TouchableOpacity } from 'react-native-gesture-handler'
 import Path from '../../constants/imagePath';
 import ProgressCircle from 'react-native-progress-circle'
 import BackgroundTheme from '../../component/backgroundtheme';

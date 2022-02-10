@@ -78,7 +78,7 @@ const Habbitsone = ({navigation}) => {
         <View style={{marginTop:heightPercentageToDP('-120%')}}>
             <View style={{ flexDirection: 'row',justifyContent:'space-between'}}>
                 <View style={{alignSelf:'center',marginLeft:10}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.goBack()}>
                     <Image source={Path.Backbutton} ></Image>
                     </TouchableOpacity>
                 </View>

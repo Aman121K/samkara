@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+// import {  } from 'react-native-gesture-handler'
 import Path from '../../constants/imagePath'
-import { View ,Text,Image,FlatList} from 'react-native'
+import { View ,Text,Image,FlatList,TouchableOpacity} from 'react-native'
 import BackgroundTheme from '../../component/backgroundtheme'
 import { heightPercentageToDP, widthPercentageToDP } from '../../utility'
 const Notification = ({navigation}) => {
@@ -49,7 +49,7 @@ const Notification = ({navigation}) => {
 <BackgroundTheme/>
         <View  style={{marginTop:heightPercentageToDP('-120%')}}>
             <View style={{margin:heightPercentageToDP('3%')}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <Image source={Path.Backbutton}></Image>
                 </TouchableOpacity>
             </View>

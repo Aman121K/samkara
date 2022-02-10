@@ -66,7 +66,7 @@ const SelectGift = ({navigation}) => {
         const { names, name } = item;
         const isSelected = childList.filter((i) => i === name).length > 0;
         return (
-            <TouchableOpacity style={{backgroundColor: 'white',borderRadius:6,padding:10,width:'40%',margin:'5%'}} onPress={()=>giftSelected(item)}>
+            <TouchableOpacity style={{backgroundColor: 'white',borderRadius:6,padding:10,width:widthPercentageToDP('43%'),margin:widthPercentageToDP('2%')}} onPress={()=>giftSelected(item)}>
                     <View >
                         {item.status?<Image source={require('../../../../assets/rcheck.png')} style={{alignSelf:'flex-end'}}></Image>:null}
                         <View style={{backgroundColor:'#F2F2F2'}}>
@@ -88,7 +88,7 @@ const SelectGift = ({navigation}) => {
         <BackgroundTheme/>
         <View style={{ marginTop:heightPercentageToDP('-122%')}}>         
             <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
-                <TouchableOpacity style={{alignSelf:'center',marginLeft:10}}>
+                <TouchableOpacity style={{alignSelf:'center',marginLeft:10}} onPress={()=>navigation.goBack()}>
                 <View >
                     <Image source={Path.Backbutton} ></Image>
                 </View>
@@ -102,7 +102,7 @@ const SelectGift = ({navigation}) => {
             <View style={{marginLeft:'8%'}}>
                 <Text style={{color:'#484C76',fontSize:20,fontWeight:'700'}}>Select Gift</Text>
             </View>
-            <View>
+            <View style={{width:widthPercentageToDP('95%'),alignSelf:'center'}}>
             <FlatList
                 data={childList}
                 renderItem={renderItem}

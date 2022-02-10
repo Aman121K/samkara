@@ -66,7 +66,9 @@ const ImagePath = {
     Harry:require('../assets/harry.png'),
     Kia:require('../assets/kia.png'),
     RIng:require('../assets/ring.png'),
-    Files:require('../assets/file.png')
+    Files:require('../assets/file.png'),
+    Share:require('../assets/share.png'),
+    Logout:require('../assets/logout.png')
   };
   
   export default ImagePath;

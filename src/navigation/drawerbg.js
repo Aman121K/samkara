@@ -1,89 +1,71 @@
 import React from 'react';
-import {View,Text, Image} from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import {View,Text, Image,ScrollView, TouchableOpacity,Share} from 'react-native';
+// import {  } from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from '../utility/index';
+import Path from '../constants/imagePath';
 const Drawerbg=({navigation})=>{
+    const logout=()=>{
+        navigation.navigate('Signin');
+    }
+    const shareApp= async()=>
+    {
+            try {
+              const result = await Share.share({
+                message:
+                  'React Native | A framework for building native apps using React',
+              });
+              if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                  // shared with activity type of result.activityType
+                } else {
+                  // shared
+                }
+              } else if (result.action === Share.dismissedAction) {
+                // dismissed
+              }
+            } catch (error) {
+              alert(error.message);
+            }
+        }
+            
+
     return(
         <View>
-           <ScrollView showsVerticalScrollIndicator={false}>
-            <TouchableOpacity onPress={()=>navigation.navigate('drawerbg')}>
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+                <View>
+                    <Image source={Path.Zaya} resizeMode="center"></Image>
                 </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>News Feed</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Albumn')}>
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>Albumn</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Savedpost')}>
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>Saved Posts</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Event')}>
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>Events</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=>navigation.navigate('Mygroups')} >
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>MY Groups</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Mypages')}>
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>My Pages</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Popularpost')} >
-            <View style={{flexDirection:'row',margin:wp('5%'),width:wp('70%'),justifyContent:'space-evenly'}}>
-                <View style={{width:wp('20%')}}>
-               
-                </View>
-                <View style={{width:wp('40%')}}>
-                <Text style={{fontSize:17,fontWeight:'900'}}>Popular Posts</Text>
-                </View>
-            </View>
-            </TouchableOpacity>
-
-            
-            </ScrollView>
+                <View>
+                    <Text style={{fontSize:16,fontWeight:'700',lineHeight:22}}>John Doe</Text>
+                    </View>
+                    <View style={{marginLeft:wp('1%')}}>
+                    <Text style={{fontSize:16,fontWeight:'bold',lineHeight:22}}>$100</Text>
+                    </View>
+          </View>
+          <TouchableOpacity onPress={()=>shareApp()}>
+          <View style={{flexDirection:'row',margin:wp('5%')}}>
+              <View>
+                    <Image source={Path.Share}></Image>
+              </View>
+              <View style={{marginLeft:wp('3%')}}>
+                    <Text style={{fontSize:14,fontWeight:'700'}}>Invite friends</Text>
+              </View>
+          </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>logout()}>
+          <View style={{flexDirection:'row',margin:wp('5%')}}>
+              <View>
+              <Image source={Path.Logout}></Image>
+              </View>
+              <View style={{marginLeft:wp('3%')}}>
+                <Text style={{fontSize:14,fontWeight:'700'}}>Logout</Text>
+              </View>
+          </View>
+          </TouchableOpacity>
         </View>
     )
 }

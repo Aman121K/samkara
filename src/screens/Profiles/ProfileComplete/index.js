@@ -8,7 +8,7 @@ const Welcome = ({navigation}) => {
         },)
     },[])
     const startApp=()=>{
-        navigation.navigate('BottomTab')
+        navigation.navigate('drawer')
     }
     return (
         <View style={{backgroundColor: '#A7CECB', height: '100%', width: '100%'}}>

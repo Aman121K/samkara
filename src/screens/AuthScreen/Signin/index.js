@@ -19,6 +19,7 @@ import {
     useBlurOnFulfill,
     useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
+// import {  } from 'react-native-gesture-handler';
 const CELL_COUNT = 5;
 const Signin = ({ navigation }) => {
     const [mobile, setMobile] = useState();
@@ -89,9 +90,9 @@ useEffect(() => {
         // navigation.navigate('KidsHomeScreen')
     }
     return (
-        <View >
+        <KeyboardAvoidingView  behavior="padding" scrollEnabled={false}>
             <BackgroundTheme />
-            <KeyboardAvoidingView>
+            {/* <ScrollView> */}
                 <View style={{ marginTop: heightPercentageToDP('-120%') }}>
                     <Image source={path.familyIcon} resizeMode='contain' style={{ justifyContent: 'center', alignSelf: 'center',}} ></Image>
                     <ImageBackground source={require('../../../assets/abcddesign.png')} style={{ height: "75%", width: '100%', marginTop: '-55%' }}>
@@ -198,6 +199,7 @@ useEffect(() => {
  and generate pin for your Kid if
 you are login first time  </Text>
                         </View>
+                        <View style={{width:wp('80%'),alignSelf:'center'}}>
                         <CodeField
                     ref={ref}
                     {...props}
@@ -209,7 +211,7 @@ you are login first time  </Text>
                     keyboardType="number-pad"
                     textContentType="oneTimeCode"
                     renderCell={({ index, symbol, isFocused }) => (
-                        <View style={{margin:widthPercentageToDP('3%'),alignSelf:'center'}} key={index}>
+                        <View style={{margin:widthPercentageToDP('2%'),alignSelf:'center'}} key={index}>
                             <Text
                                 style={[styles.cell, isFocused && styles.focusCell]}
                                 onLayout={getCellOnLayoutHandler(index)}>
@@ -218,6 +220,7 @@ you are login first time  </Text>
                         </View>
                     )}
                 />
+                </View>
 
                         <View style={buttonColor ? { margin: '5%', backgroundColor: '#2D928D', padding: 13, alignItems: 'center', borderRadius: 6 } : { margin: '5%', backgroundColor: '#A7CECB', padding: 13, alignItems: 'center', borderRadius: 6 }}>
                             <TouchableOpacity onPress={() =>navigation.navigate('KidsHomeScreen')}>
@@ -231,8 +234,9 @@ you are login first time  </Text>
                 }
                     </ImageBackground>
                 </View>
+                {/* </ScrollView> */}
             </KeyboardAvoidingView>
-        </View>
+     
 
     )
 }

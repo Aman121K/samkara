@@ -1,31 +1,45 @@
-// import React from 'react'
-// import { View ,Text} from 'react-native'
-// const EditProfile = () => {
-//     return (
-//         <View style={{backgroundColor:'#A7CECB',height:'100%',width:'100%'}}>
-//             <Text>Self Profile</Text>
-//         </View>
-//     )
-// }
-// export default EditProfile
-
 
 import React ,{useState} from 'react';
-import { View,Text,TextInput, Image } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { View,Text,TextInput, Image ,ScrollView, TouchableOpacity} from 'react-native';
+// import {  } from 'react-native-gesture-handler';
 import path from '../../../constants/imagePath';
 import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
+import {
+  Appbar,
+  DarkTheme,
+  DefaultTheme,
+  Provider,
+  Surface,
+  ThemeProvider,
+} from "react-native-paper";
 import { List } from 'react-native-paper';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import { heightPercentageToDP } from '../../../utility';
 import DatePicker from 'react-native-date-picker'
-// import {Picker} from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
-// import { file } from '@babel/types';
+import DropDown from "react-native-paper-dropdown";
+// import DropDownPicker from 'react-native-dropdown-picker';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from '../../../utility';
+
 const EditProfile = ({navigation}) => {
+  const [gender, setGender] = useState();
+  const [showDropDown, setShowDropDown] = useState(false);
+  const genderList = [
+    {
+      label: "Male",
+      value: "male",
+    },
+    {
+      label: "Female",
+      value: "female",
+    },
+    {
+      label: "Others",
+      value: "others",
+    },
+  ];
   const [selectedLanguage, setSelectedLanguage] = useState("java");
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
@@ -107,7 +121,7 @@ const EditProfile = ({navigation}) => {
   }
 
     return (
-      <View>
+      <Provider>
          <ScrollView style={{backgroundColor:'#CDE5E4'}}>
          <BackgroundTheme />
         <View style={ {marginTop: heightPercentageToDP('-115%')}}>
@@ -163,14 +177,23 @@ const EditProfile = ({navigation}) => {
           setOpen(false)
         }}
       />
-                    <View style={{ backgroundColor: 'white', borderRadius: 5, width: '45%', alignItems: 'center', margin: '2%', flexDirection:'row', }}>
-                    <TextInput
-                           style={{marginLeft:10,color:'black'}}
-                            placeholder="Gender*"
-                            value="Female"
-                            placeholderTextColor="#9E9E9E"
-                            autoCapitalize="none"
-                        />
+                    <View style={{width:wp('45%'),}}>
+                    <DropDown
+                    
+                    // dropDownStyle={{backgroundColor:'red'}}
+              label={"Gender"}
+              mode={"flat"}
+              visible={showDropDown}
+              showDropDown={() => setShowDropDown(true)}
+              onDismiss={() => setShowDropDown(false)}
+              value={gender}
+              setValue={setGender}
+              list={genderList}
+            />
+                        {/* <TouchableOpacity style={{ marginLeft: '63%' }}>
+                            <Image source={require('../../../assets/Vector.png')} ></Image>
+                        </TouchableOpacity> */}
+                    </View>
                     {/* <Picker
   selectedValue={selectedLanguage}
   onValueChange={(itemValue, itemIndex) =>
@@ -179,10 +202,7 @@ const EditProfile = ({navigation}) => {
   <Picker.Item label="Java" value="java" />
   <Picker.Item label="JavaScript" value="js" />
 </Picker> */}
-                        <TouchableOpacity style={{marginLeft:'60%'}}>
-                        <Image source={require('../../../assets/Vector.png')} ></Image>
-                        </TouchableOpacity>
-                    </View>
+                      
                 </View>
                 <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center' }}>
                     <View style={{ backgroundColor: 'white', borderRadius: 5, width: '45%', alignItems: 'center', margin: '2%', flexDirection:'row', }}>
@@ -258,7 +278,7 @@ const EditProfile = ({navigation}) => {
         </View>
        
         </ScrollView>
-        </View>
+        </Provider>
     )
 }
 export default EditProfile;

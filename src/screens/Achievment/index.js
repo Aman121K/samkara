@@ -10,9 +10,9 @@
 // export default Achievment
 
 import React,{useState} from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { TouchableOpacity } from 'react-native-gesture-handler'
 import Path from '../../constants/imagePath'
-import { View ,Text,Image,FlatList} from 'react-native'
+import { View ,Text,Image,FlatList,TouchableOpacity} from 'react-native'
 import BackgroundTheme from '../../component/backgroundtheme'
 import { heightPercentageToDP } from '../../utility'
 const Achievment = ({navigation}) => {
@@ -46,7 +46,7 @@ const Achievment = ({navigation}) => {
         <>
         <BackgroundTheme/>
         <View style={{marginTop:heightPercentageToDP('-120%')}}>
-            <TouchableOpacity style={{margin:'3%'}}>
+            <TouchableOpacity style={{margin:heightPercentageToDP('2%')}} onPress={()=>navigation.goBack()} >
             <View>
                 <Image source={Path.Backbutton}></Image>
             </View>

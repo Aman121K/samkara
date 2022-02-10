@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { View, Text, ScrollView, Image, ImageBackground, Button, TouchableOpacity } from 'react-native';
 import Path from '../../constants/imagePath';
 import Modal from "react-native-modal";
-import { DrawerActions } from '@react-navigation/drawer'
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import  openDrawer  from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native';
 import BackgroundTheme from '../../component/backgroundtheme';
-import { heightPercentageToDP } from '../../utility';
+import { heightPercentageToDP, widthPercentageToDP } from '../../utility';
 const Home = ({ navigation ,route}) => {
-    // const { itemId} = route.params;
-    // console.log("navigation data",itemId);
+    // console.log("gfhgf",route.params.itemID)
+    // const {itemID}=route.params;
+    // console.log("Values got it ...",itemID);
+   
     const [like,setLike]=useState(104);
-    // const navigation = useNavigation();
     const [homeHabbit, setHomeHabbit] = useState([
         { id: 'Swimming', image: Path.Swimming, title: 'Malesuada eros ipsum integer nisi suspen....', display: true },
         { id: 'Healthy Eating', image: Path.Eating, title: 'Malesuada eros ipsum integer nisi suspen....', display: true },
@@ -32,13 +32,13 @@ const Home = ({ navigation ,route}) => {
     }
     return (
         <View>
-            <ScrollView style={{ backgroundColor: '#CDE5E4' }}>
+            <ScrollView style={{ backgroundColor: '#CDE5E4' }} showsVerticalScrollIndicator={false}>
                 <BackgroundTheme />
                 <View style={{ marginTop: heightPercentageToDP('-120%'), width: '100%' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ margin: '5%', flexDirection: 'row' }}>
                             <View>
-                                <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                                <TouchableOpacity onPress={()=> navigation.openDrawer()}>
                                     <Image source={Path.Zaya} style={{ width: 40, height: 40 }}></Image>
                                 </TouchableOpacity>
                             </View>
@@ -88,7 +88,9 @@ const Home = ({ navigation ,route}) => {
                         {/* </TouchableOpacity> */}
                         <View style={{ backgroundColor: 'white', width: '45%', padding: 10, borderRadius: 10 }}>
                             <Text style={{ color: '#484C76', fontWeight: '500', fontSize: 13 }}>$35</Text>
+                            <TouchableOpacity onPress={() => setModalVisible(true)}>
                             <Image source={Path.Eating} style={{ alignSelf: 'center' }}></Image>
+                            </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}>Healthy Eating</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
@@ -102,7 +104,9 @@ const Home = ({ navigation ,route}) => {
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', margin: '2%' }}>
                         <View style={{ backgroundColor: 'white', width: '45%', padding: 10, borderRadius: 10 }}>
                             <Text style={{ color: '#484C76', fontWeight: '500', fontSize: 13 }}>$35</Text>
+                            <TouchableOpacity onPress={() => setModalVisible(true)}>
                             <Image source={Path.Swimming} style={{ alignSelf: 'center' }}></Image>
+                            </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}> Swimming</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
@@ -114,7 +118,9 @@ const Home = ({ navigation ,route}) => {
                         </View>
                         <View style={{ backgroundColor: 'white', width: '45%', padding: 10, borderRadius: 10 }}>
                             <Text style={{ color: '#484C76', fontWeight: '500', fontSize: 13 }}>$35</Text>
+                            <TouchableOpacity onPress={() => setModalVisible(true)}>
                             <Image source={Path.Eating} style={{ alignSelf: 'center' }}></Image>
+                            </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}>Healthy Eating</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
@@ -126,9 +132,10 @@ const Home = ({ navigation ,route}) => {
                         </View>
                     </View>
                     <View>
-                        <Text style={{ color: 'black', marginLeft: '5%', fontSize: 18, fontWeight: '700', }}>Trending Habits</Text>
+                        <Text style={{ color: '#484C76', marginLeft: '5%', fontSize: 18, fontWeight: '700',top:5 }}>Trending Habits</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, margin: '5%', borderRadius: 10 }}>
+                    <TouchableOpacity onPress={()=> navigation.navigate("Habbitsone")}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, marginTop: heightPercentageToDP('2%'), borderRadius: 10,width:widthPercentageToDP('90%'),alignSelf:'center' }}>
                         <View style={{ backgroundColor: '#FFBF7F' }}>
                             <Text>.</Text>
                         </View>
@@ -144,7 +151,9 @@ const Home = ({ navigation ,route}) => {
                             <Image source={Path.ThreeOne}></Image>
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, margin: '5%', borderRadius: 10, marginBottom: '25%' }}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=> navigation.navigate("Habbitsone")}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, margin: '5%', marginTop: heightPercentageToDP('2%'), borderRadius: 10,width:widthPercentageToDP('90%'),alignSelf:'center' ,marginBottom:heightPercentageToDP('12%')}}>
                         <View style={{ backgroundColor: '#FFBF7F' }}>
                             <Text>.</Text>
                         </View>
@@ -160,6 +169,7 @@ const Home = ({ navigation ,route}) => {
                             <Image source={Path.ThreeOne}></Image>
                         </View>
                     </View>
+                    </TouchableOpacity>
 
                     <Modal isVisible={isModalVisible}>
                         <View style={{ backgroundColor: 'white', width: '100%', borderRadius: 10 }}>
@@ -187,7 +197,7 @@ const Home = ({ navigation ,route}) => {
 
                             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', top: -20 }}>
                                 <TouchableOpacity onPress={() => toggleModal()} >
-                                    <View style={{ padding: 5, borderColor: 'green', borderWidth: 1, borderRadius: 6,width:'120%' }}>
+                                    <View style={{ padding: 5, borderColor: 'green', borderWidth: 1, borderRadius: 6 }}>
                                         <View style={{ flexDirection: 'row', padding: 5 }}>
                                             <View>
                                                 <Image source={Path.Alertok} style={{ alignSelf: 'center',height:15,width:15,top:3 }}></Image>
@@ -199,12 +209,14 @@ const Home = ({ navigation ,route}) => {
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => setModalVisible(false)}>
-                                    <View style={{ padding: 5, borderColor: 'red', borderWidth: 1, flexDirection: 'row', borderRadius: 6,width:"120%" }}>
-                                        <View style={{ alignSelf: 'center', padding: 5 }}>
-                                            <Image source={Path.AlertCancel}></Image>
+                                    <View style={{ padding: 5, borderColor: 'red', borderWidth: 1,  borderRadius: 6 }}>
+                                        <View style={{ flexDirection: 'row', padding: 5 }}>
+                                        <View>
+                                            <Image source={Path.AlertCancel} style={{ alignSelf: 'center',height:15,width:15,top:3 }}></Image>
                                         </View>
-                                        <View style={{ alignSelf: 'center' }}>
+                                        <View style={{ alignSelf: 'center' ,alignSelf:'center',marginLeft:10}}>
                                             <Text style={{ color: 'red' }}>Later</Text>
+                                        </View>
                                         </View>
                                     </View>
                                 </TouchableOpacity>

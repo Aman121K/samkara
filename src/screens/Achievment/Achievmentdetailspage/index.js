@@ -1,28 +1,21 @@
 import React from 'react'
-import { View ,Text,Image, ScrollView} from 'react-native';
+import { View ,Text,Image, ScrollView,TouchableOpacity} from 'react-native';
 import Path from '../../../constants/imagePath';
 import ProgressCircle from 'react-native-progress-circle'
 import {LocaleConfig} from 'react-native-calendars';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { heightPercentageToDP, widthPercentageToDP } from '../../../utility';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import {  } from 'react-native-gesture-handler';
 const AchievementDetails = ({navigation}) => {
-    // LocaleConfig.locales['fr'] = {
-    //     monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-    //     monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
-    //     dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-    //     dayNamesShort: ['Sun','Mon','Tue','Wed','Thru','Fri','Sat'],
-    //     today: 'Aujourd\'hui'
-    //   };
-    //   LocaleConfig.defaultLocale = 'fr';
+
     return (
         <>
         <BackgroundTheme/>
-       <ScrollView style={{marginTop:heightPercentageToDP('-120%')}}>
+       <ScrollView style={{marginTop:heightPercentageToDP('-120%')}} showsVerticalScrollIndicator={false}>
         <View>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                <TouchableOpacity style={{margin:heightPercentageToDP('2%')}}>
+                <TouchableOpacity style={{margin:heightPercentageToDP('2%')}} onPress={()=>navigation.goBack()}>
                 <Image source={Path.Backbutton} style={{alignSelf:'center'}}></Image>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>
@@ -107,7 +100,6 @@ const AchievementDetails = ({navigation}) => {
                     </View>
                    
             </View>
-           
         </View>
         </ScrollView>
         </>

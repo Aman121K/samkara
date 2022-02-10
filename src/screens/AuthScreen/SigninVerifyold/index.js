@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, StyleSheet, Image,View } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, Image,View,TouchableOpacity } from 'react-native';
 import {
     CodeField,
     Cursor,
@@ -7,7 +7,7 @@ import {
     useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import path from '../../../constants/imagePath';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import {  } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
 const styles = StyleSheet.create({
     root: { flex: 1, padding: 20 },

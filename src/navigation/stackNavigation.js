@@ -29,11 +29,13 @@ import KidsHomeScreen from '../screens/KidsRecords/KidsHomescree';
 import KidsRewards from '../screens/KidsRecords/KidsRewards';
 import ReportsAndActivity from '../screens/KidsRecords/ReportsAnalytics';
 import Habitsdetails from '../screens/Habits/HabitsDetails/index';
+import Splash from '../screens/AuthScreen/Splash';
 
 const Stack = createStackNavigator();
 const Stacks = () => {
     return (
         <Stack.Navigator>
+            <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>
             <Stack.Screen name="Onboarding" component={Onboarding} options={{headerShown:false}}/>   
             <Stack.Screen name="Signin" component={Signin} options={{headerShown:false}}/> 
             <Stack.Screen name="Siginverify" component={SigninVerify} options={{headerShown:false}}/>

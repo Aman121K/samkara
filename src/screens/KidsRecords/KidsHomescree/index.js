@@ -1,73 +1,12 @@
-// import React,{useState} from 'react'
-// import { View ,Text,Image,TouchableOpacity} from 'react-native-animatable'
-// import BackgroundTheme from '../../../component/backgroundtheme'
-// import { heightPercentageToDP } from '../../../utility'
-// import Path from '../../../constants/imagePath';
-// import { FlatList } from 'react-native';
-
-// const KidsHomeScreen = ({navigation}) => {
-//     const [childList, setChildList] = useState([
-//         { id: 1, name: 'Zyan Smith', image: Path.JohnDoe, title: 'Periodo determinado', value: 65, color: '#D26F83' },
-//         { id: 1, name: 'Zyan Smith', image: Path.JohnDoe, title: 'Periodo determinado', value: 75, color: '#FFBF7F' },
-//         { id: 1, name: 'Zyan Smith', image: Path.JohnDoe, title: 'Periodo determinado', value: 35, color: '#467F9B' },
-//         { id: 1, name: 'Zyan Smith', image: Path.JohnDoe, title: 'Periodo determinado', value: 95, color: '#91C6E8' },
-//     ])
-//     const renderItem = ({ item, index }) => {
-//         return (
-//                 <TouchableOpacity >
-//                     <View style={{ width: '90%', backgroundColor: 'white', margin: '2%', alignSelf: 'center',flexDirection:'row',borderRadius:10}}>
-//                         <View style={{backgroundColor:item.color,borderTopLeftRadius:20,borderBottomLeftRadius:20}}>
-//                             <Text style={{color:item.color}}>..</Text>
-//                         </View>
-//                         <View>
-//                             <Image source={item.image} style={{height:70,width:70}}></Image>
-//                             </View>
-//                         <View style={{alignSelf:'center'}}>
-//                             <Text style={{color:'black',fontSize:16,fontWeight:'500'}}>{item.name}</Text>
-//                             <Text style={{color:'black',fontWeight:'400',fontSize:11}} >{item.title}</Text>
-//                         </View>
-                       
-                       
-//                     </View>
-//                 </TouchableOpacity>
-          
-//         );
-//     };
-//     const keyExtractor = (item, index) => item + index;
-//     return (
-//         <>
-//         <BackgroundTheme/>
-//         <View style={{marginTop:heightPercentageToDP('-120%')}}>
-//             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-//                 <Image source={Path.Zaya}></Image>
-//                 <Image source={Path.Notification}></Image>
-//             </View>
-//             <Text style={{color:'#484C76',fontSize:18,fontWeight:'700'}}>Yours Activity</Text>
-       
-//             <FlatList
-//                 data={childList}
-//                 renderItem={renderItem}
-//                 keyExtractor={keyExtractor}
-//             />
-           
-
-//         </View>
-//         </>
-//     )
-// }
-
-// export default KidsHomeScreen
 
 
 import React, { useState } from 'react'
 import { View, Text, Image,FlatList,ScrollView, ImageBackground,TouchableOpacity } from 'react-native'
-// import {  TouchableOpacity } from 'react-native-gesture-handler'
 import Path from '../../../constants/imagePath';
 import ProgressCircle from 'react-native-progress-circle'
 import BackgroundTheme from '../../../component/backgroundtheme';
 import { heightPercentageToDP, widthPercentageToDP } from '../../../utility';
 import CalendarStrip from 'react-native-slideable-calendar-strip';
-
 const KidsHomeScreen = ({navigation}) => {
     const [childList, setChildList] = useState([
         { id: 1, name: 'Task 1', image: Path.JohnDoe, title: 'Periodo determinado', value: 65, color: '#D26F83' },
@@ -85,7 +24,7 @@ const KidsHomeScreen = ({navigation}) => {
     ])
     const renderItem1=({item,index})=>{
         return(
-            <View style={{borderWidth:1,borderColor:item.borderColor,padding:5,borderRadius:6,width:widthPercentageToDP('12%'),margin:'1%',alignItems:'center'}}>
+            <View style={{borderWidth:1,borderColor:item.borderColor,padding:5,borderRadius:6,width:widthPercentageToDP('12%'),margin:'1%',alignItems:'center',height:heightPercentageToDP('7%')}}>
             <TouchableOpacity >
         <Text style={{color:'black'}}>{item.day}</Text>
         <Text style={{color:'black'}}>{item.date}</Text>

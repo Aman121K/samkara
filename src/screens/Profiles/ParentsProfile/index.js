@@ -1,19 +1,62 @@
 import React ,{useState} from 'react';
-import { View,Text,TextInput, Image } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { View,Text,TextInput, Image,ScrollView, TouchableOpacity } from 'react-native';
+// import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import path from '../../../constants/imagePath';
 import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
+import {
+  Appbar,
+  DarkTheme,
+  DefaultTheme,
+  Provider,
+  Surface,
+  ThemeProvider,
+} from "react-native-paper";
 import { List } from 'react-native-paper';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import { heightPercentageToDP } from '../../../utility';
 import DatePicker from 'react-native-date-picker'
-// import {Picker} from '@react-native-picker/picker';
-import DropDownPicker from 'react-native-dropdown-picker';
-// import { file } from '@babel/types';
+import DropDown from "react-native-paper-dropdown";
+import CountryPicker from 'react-native-country-picker-modal'
+import { widthPercentageToDP as wp,heightPercentageToDP as hp } from '../../../utility';
 const ParentsProfile = ({navigation}) => {
+  const [gender, setGender] = useState();
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [showDropDownstate, setShowDropDownstate] = useState(false);
+  
+
+  const [country,setCountry]=useState();
+  const [state,setState]=useState();
+  const genderList = [
+      {
+        label: "Male",
+        value: "male",
+      },
+      {
+        label: "Female",  
+        value: "female",
+      },
+      {
+        label: "Others",
+        value: "others",
+      },
+    ];
+    const stateList = [
+      {
+        label: "Punjab",
+        value: "Punjab",
+      },
+      {
+        label: "Uttar Pardesh",  
+        value: "Uttar Pardesh",
+      },
+      {
+        label: "Delhi",
+        value: "Delhi",
+      },
+    ];
   const [selectedLanguage, setSelectedLanguage] = useState("java");
   const [date, setDate] = useState(new Date())
   const [open, setOpen] = useState(false)
@@ -90,13 +133,17 @@ const ParentsProfile = ({navigation}) => {
       setFilePath(response.assets.uri);
     });
   };
+  const openCiuntry=()=>{
+    // return(
+    
+    // )
+  }
 
     return (
-      <View>
-         <ScrollView style={{backgroundColor:'#CDE5E4'}}>
+      <Provider>
+         <ScrollView style={{backgroundColor:'#CDE5E4'}} showsVerticalScrollIndicator={false}>
          <BackgroundTheme />
         <View style={ {marginTop: heightPercentageToDP('-115%')}}>
-           
               <View style={{alignSelf:'center'}}>
                 <Text style={{fontSize:20,fontWeight:'900',color:'black'}}>My Profile</Text>
                 </View>
@@ -128,7 +175,7 @@ const ParentsProfile = ({navigation}) => {
                             placeholderTextColor="#9E9E9E"
                             autoCapitalize="none"
                         />
-                         <TouchableOpacity style={{marginLeft:'69%'}} onPress={() => setOpen(true)}>
+                         <TouchableOpacity style={{marginLeft:wp('20%')}} onPress={() => setOpen(true)}>
                          <Image source={require('../../../assets/CalendarVector.png')}  ></Image>
                          </TouchableOpacity>
                     </View>
@@ -147,24 +194,19 @@ const ParentsProfile = ({navigation}) => {
           setOpen(false)
         }}
       />
-                    <View style={{ backgroundColor: 'white', borderRadius: 5, width: '45%', alignItems: 'center', margin: '2%', flexDirection:'row', }}>
-                    <TextInput
-                           style={{marginLeft:10,color:'black'}}
-                            placeholder="Gender*"
-                            placeholderTextColor="#9E9E9E"
-                            autoCapitalize="none"
-                        />
-                    {/* <Picker
-  selectedValue={selectedLanguage}
-  onValueChange={(itemValue, itemIndex) =>
-    setSelectedLanguage(itemValue)
-  }>
-  <Picker.Item label="Java" value="java" />
-  <Picker.Item label="JavaScript" value="js" />
-</Picker> */}
-                        <TouchableOpacity style={{marginLeft:'60%'}}>
-                        <Image source={require('../../../assets/Vector.png')} ></Image>
-                        </TouchableOpacity>
+                   <View style={{width:wp('45%')}}>
+                    <DropDown
+                    // theme="red"
+              label={"Gender"}
+              // dropDownStyle={{backgroundColor:'red'}}
+              // mode={"flat"}
+              visible={showDropDown}
+              showDropDown={() => setShowDropDown(true)}
+              onDismiss={() => setShowDropDown(false)}
+              value={gender}
+              setValue={setGender}
+              list={genderList}
+            />
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center' }}>
@@ -174,21 +216,26 @@ const ParentsProfile = ({navigation}) => {
                             placeholder="Country*"
                             placeholderTextColor="#9E9E9E"
                             autoCapitalize="none"
+                            value={country}
                         />
-                        <TouchableOpacity style={{marginLeft:'60%'}} >
+                        <TouchableOpacity style={{marginLeft:wp('15%')}}  onPress={()=>openCiuntry()}>
                          <Image source={require('../../../assets/Vector.png')}  ></Image>
+                         <CountryPicker onSelect={(e)=>setCountry(e.name)}></CountryPicker>
                          </TouchableOpacity>
                     </View>
-                    <View style={{ backgroundColor: 'white', borderRadius: 5, width: '45%', alignItems: 'center', margin: '2%',  flexDirection:'row', }}>
-                        <TextInput
-                           style={{marginLeft:10,color:'black'}}
-                            placeholder="State*"
-                            placeholderTextColor="#9E9E9E"
-                            autoCapitalize="none"
-                        />
-                        <TouchableOpacity style={{marginLeft:'67%'}}>
-                         <Image source={require('../../../assets/Vector.png')}  ></Image>
-                         </TouchableOpacity>
+                    <View style={{width:wp('45%'),marginTop:hp('1%')}}>
+                    <DropDown
+                    // theme="red"
+              label={"State*"}
+              // dropDownStyle={{backgroundColor:'red'}}
+              // mode={"flat"}
+              visible={showDropDownstate}
+              showDropDown={() => setShowDropDownstate(true)}
+              onDismiss={() => setShowDropDownstate(false)}
+              value={state}
+              setValue={setState}
+              list={stateList}
+            />
                     </View>
                 </View>
             <View style={{backgroundColor:'white',borderRadius:5,width:'90%',alignItems:'center',margin:'2%', flexDirection:'row',marginLeft:'5%'}}>
@@ -198,7 +245,7 @@ const ParentsProfile = ({navigation}) => {
                placeholderTextColor = "#9E9E9E"
                autoCapitalize = "none"
               />
-              <TouchableOpacity style={{marginLeft:'87%'}}>
+              <TouchableOpacity style={{marginLeft:wp('70%')}}>
               <Image source={require('../../../assets/Vector.png')}  ></Image>
               </TouchableOpacity>
             </View>
@@ -233,9 +280,9 @@ const ParentsProfile = ({navigation}) => {
             </TouchableOpacity>
             </View>
         </View>
-       
         </ScrollView>
-        </View>
+
+        </Provider>
     )
 }
 export default ParentsProfile;

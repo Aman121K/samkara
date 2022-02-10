@@ -80,7 +80,7 @@ const KidsProfileShow = ({navigation}) => {
     <BackgroundTheme/>
     <View style={{marginTop:heightPercentageToDP('-120%')}}>
       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-<TouchableOpacity style={{margin:'3%'}}>
+<TouchableOpacity style={{margin:'3%'}} onPress={()=>navigation.goBack()}>
   <View>
     <Image source={Path.Backbutton}></Image>
   </View>

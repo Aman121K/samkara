@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, Image,FlatList,ScrollView } from 'react-native'
-import {  TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, Image,FlatList,ScrollView,TouchableOpacity } from 'react-native'
+// import {   } from 'react-native-gesture-handler'
 import Path from '../../../constants/imagePath';
 import ProgressCircle from 'react-native-progress-circle'
 import BackgroundTheme from '../../../component/backgroundtheme';
@@ -38,7 +38,10 @@ const AllKidsprofile = ({navigation}) => {
             shadowColor="white"
             bgColor="white"
         >
+            <View style={{flexDirection:'row'}}>
             <Text style={{ fontSize: 12,color:'black' }}>{item.value}</Text>
+            <Text style={{color:'black',marginLeft:2}}>%</Text>
+            </View>
         </ProgressCircle>
                            </View>
                     </View>
@@ -58,19 +61,7 @@ const AllKidsprofile = ({navigation}) => {
                     Kids Profile
                 </Text>
             </View>
-            <View style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-                <View>
-                    <Image source={Path.JohnDoe} style={{ height: 70, width: 70 }}></Image>
-                </View>
-                <View style={{ alignSelf: 'center' }}>
-                    <Text style={{color:'black'}}>John Doe</Text>
-                </View>
-                <View>
-                    <Image source={Path.Notification} style={{ height: 70, width: 70 }}></Image>
-                </View>
-
-            </View>
-            <View>
+            <View style={{marginTop:heightPercentageToDP('5%')}}>
             <FlatList
                 data={childList}
                 renderItem={renderItem}

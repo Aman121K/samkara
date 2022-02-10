@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View ,Text,TouchableOpacity,ScrollView,Image} from 'react-native';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import Path from '../../../constants/imagePath';
 import { heightPercentageToDP } from '../../../utility';
+import DatePicker from 'react-native-date-picker'
 const Activityassign = ({navigation}) => {
+    // const [startDate,setStartDate]=useState();
+    const [endDate,setEndDate]=useState();
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+    const [open1,setOpen1]=useState(false);
     return (
         <>
         <BackgroundTheme/>
         <View style={{ marginTop:heightPercentageToDP('-120%') }}>
             <View style={{ flexDirection: 'row', justifyContent:'space-between'}}>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={()=>navigation.goBack()} >
                 <View>
                     <Image source={Path.Backbutton} style={{margin:heightPercentageToDP('2%')}} ></Image>
                 </View>
@@ -40,23 +46,23 @@ const Activityassign = ({navigation}) => {
             <View style={{flexDirection:'row',justifyContent:'space-evenly',padding:10}}>
                 <View style={{flexDirection:'row',width:'45%',borderWidth:.5,borderRadius:6,justifyContent:'space-evenly'}}>
                     <Text style={{color:'black',alignSelf:'center'}}>Start Date</Text>
-                    <TouchableOpacity>
-                    <Image source={Path.Calender} style={{alignSelf:'center'}}></Image>
+                    <TouchableOpacity onPress={() => setOpen(true)} >
+                    <Image source={Path.Calender} style={{marginTop:heightPercentageToDP('1.5%')}} ></Image>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{flexDirection:'row',padding:10,width:'45%',borderWidth:.5,borderRadius:6,justifyContent:'space-evenly'}}>
-                <Text style={{color:'black'}}>End Date</Text>
-                <TouchableOpacity>
-                    <Image source={Path.Calender}></Image>
+                <Text style={{color:'black',alignSelf:'center'}}>End Date</Text>
+                <TouchableOpacity onPress={()=>setOpen1(!open1)} >
+                    <Image source={Path.Calender} ></Image>
                     </TouchableOpacity>
                 </View>
 
             </View>
             </View>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Image source={Path.JohnDoe} resizeMode="contain" ></Image>
-                    <Text style={{fontSize:18,fontWeight:'bold',color:'black'}}>Zyan Smith</Text>
+                <View style={{flexDirection:'row'}}>
+                    <Image source={Path.Zaya} resizeMode="center"></Image>
+                    <Text style={{fontSize:18,fontWeight:'bold',color:'black',alignSelf:'center'}}>Zyan Smith</Text>
                 </View>
          
             <View style={{padding:5,backgroundColor:'white',width:'45%',alignItems:'center',margin:'3%',borderRadius:6}}>
@@ -67,11 +73,41 @@ const Activityassign = ({navigation}) => {
                
                 </View>
             </View>           
-         <TouchableOpacity onPress={()=>navigation.navigate('BottomTab', {itemID:true})}>
+         <TouchableOpacity onPress={()=>navigation.navigate({ name: 'BottomTab',params: {itemID:true}})}>
          <View style={{width:'80%',backgroundColor:'#A7CECB',padding:10,borderRadius:6,margin:'10%'}}>
                     <Text style={{fontWeight:'bold',fontSize:16,color:'white',alignSelf:'center'}}>Confirmed</Text>
             </View>
             </TouchableOpacity>
+            <DatePicker
+         mode="date"
+         modal={true}
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          console.log("VIkas",date);
+          setOpen(false)
+          setDate(date)
+          setNewDate(date);
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
+       <DatePicker
+         mode="date"
+         modal={true}
+        open={open1}
+        date={date}
+        onConfirm={(date) => {
+          console.log("VIkas",date);
+          setOpen1(false)
+          setDate(date)
+        //   setNewDate(date);
+        }}
+        onCancel={() => {
+          setOpen1(false)
+        }}
+      />
         </View>
     </>
     )

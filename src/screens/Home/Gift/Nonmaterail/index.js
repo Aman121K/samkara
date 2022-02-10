@@ -39,7 +39,7 @@ const Nonmaterialgift = ({navigation}) => {
         <View style={{ marginTop:heightPercentageToDP('-120%') }}>
 
             <View style={{ flexDirection: 'row',justifyContent:'space-between' }}>
-                <TouchableOpacity style={{marginLeft:'5%',alignSelf:'center'}}>
+                <TouchableOpacity style={{marginLeft:'5%',alignSelf:'center'}} onPress={()=>navigation.goBack()}>
                 <View >
                     <Image source={Path.Backbutton} ></Image>
                 </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, StyleSheet, Image, View, ImageBackground, KeyboardAvoidingView  } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, Image, View, ImageBackground, KeyboardAvoidingView ,TouchableOpacity } from 'react-native';
 import {
     CodeField,
     Cursor,
@@ -7,7 +7,7 @@ import {
     useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import path from '../../../constants/imagePath';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { color } from 'react-native-reanimated';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp, heightPercentageToDP, widthPercentageToDP } from '../../../utility';
@@ -57,6 +57,7 @@ const Signinverify = ({ navigation }) => {
                 <View style={{ alignSelf: 'center' }}>
                     <Text style={{ color: '#484C76',fontSize:14,fontWeight:'500' }}>Delivious has sent a code to verify the Code</Text>
                 </View>
+                <View style={{width:wp('80%'),alignSelf:'center'}}>
                 <CodeField
                     ref={ref}
                     {...props}
@@ -77,6 +78,7 @@ const Signinverify = ({ navigation }) => {
                         </View>
                     )}
                 />
+                </View>
                 
                 <TouchableOpacity onPress={() => navigation.navigate('ParentsProfile')}>
                     <View style={{ margin: '4%', backgroundColor: '#A7CECB', padding: 13, alignItems: 'center', borderRadius: 6 }}>

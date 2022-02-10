@@ -1,20 +1,40 @@
-// import React from 'react'
-// import { View ,Text} from 'react-native'
-// const KidsProfileedits = () => {
-//     return (
-//         <View style={{backgroundColor:'#A7CECB',height:'100%',width:'100%'}}>
-//             <Text>Self Profile</Text>
-//         </View>
-//     )
-// }
-// export default KidsProfileedits
 
 import React,{useState} from 'react';
 import {View, Text, Image, ScrollView,FlatList, TouchableOpacity,TextInput} from 'react-native';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import Path from '../../../constants/imagePath';
+import DropDown from "react-native-paper-dropdown";
+import {
+    Appbar,
+    DarkTheme,
+    DefaultTheme,
+    Provider,
+    Surface,
+    ThemeProvider,
+  } from "react-native-paper";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from '../../../utility';
 import { heightPercentageToDP, widthPercentageToDP } from '../../../utility';
+import DatePicker from 'react-native-date-picker'
 const KidsProfileedits = ({navigation}) => {
+    const [gender, setGender] = useState();
+    const [showDropDown, setShowDropDown] = useState(false);
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+    const [newdate,setNewDate]=useState('');
+    const genderList = [
+      {
+        label: "Male",
+        value: "male",
+      },
+      {
+        label: "Female",
+        value: "female",
+      },
+      {
+        label: "Others",
+        value: "others",
+      },
+    ];
     const [habbits, setHabbits] = useState([
         {
             id: 1,
@@ -86,13 +106,13 @@ const KidsProfileedits = ({navigation}) => {
             
         }
   return (
-      <>
+      <Provider>
       <BackgroundTheme/>
     <View style={{marginTop:'-230%'}}>
       <ScrollView>
          
         <View style={{alignItems:'center',flexDirection:'row'}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
             <Image source={Path.Backbutton} style={{marginLeft:10}}></Image>
             </TouchableOpacity>
           <Text style={{fontSize:22,fontWeight:'bold',color:'black',marginLeft:widthPercentageToDP('30%')}}>Kids Profile</Text>
@@ -137,23 +157,43 @@ const KidsProfileedits = ({navigation}) => {
                             placeholderTextColor="#9E9E9E"
                             autoCapitalize="none"
                         />
-                        <TouchableOpacity style={{ marginLeft: widthPercentageToDP('20%%')}}>
+                        <TouchableOpacity style={{ marginLeft: widthPercentageToDP('20%%')}}  onPress={() => setOpen(true)}>
                             <Image source={require('../../../assets/CalendarVector.png')}  ></Image>
                         </TouchableOpacity>
                     </View>
-                    <View style={{ backgroundColor: 'white', borderRadius: 5, width: '45%', alignItems: 'center', margin: '2%', flexDirection: 'row', }}>
-                        <TextInput
-                            style={{ marginLeft: 10 ,color:'black'}}
-                            placeholder="Gender*"
-                            value="Male"
-                            placeholderTextColor="#9E9E9E"
-                            autoCapitalize="none"
-                        />
-                        <TouchableOpacity style={{ marginLeft: widthPercentageToDP('15%%') }}>
-                            <Image source={require('../../../assets/Vector.png')} ></Image>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                    <DatePicker
+         mode="date"
+         modal={true}
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          console.log("VIkas",date);
+          setOpen(false)
+          setDate(date)
+          setNewDate(date);
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
+                  
+               
+                <View style={{width:wp('45%'),}}>
+                    <DropDown
+                    
+                    // dropDownStyle={{backgroundColor:'red'}}
+              label={"Gender"}
+              mode={"flat"}
+              visible={showDropDown}
+              showDropDown={() => setShowDropDown(true)}
+              onDismiss={() => setShowDropDown(false)}
+              value={gender}
+              setValue={setGender}
+              list={genderList}
+            />
+            </View>
+
+            </View>
                 <View style={{marginLeft:'5%'}}>
                     <Text style={{color:'black',fontWeight:'500',fontSize:17}}>Interest Habit</Text>
                     <FlatList
@@ -172,7 +212,7 @@ const KidsProfileedits = ({navigation}) => {
             </View>
       </ScrollView>
     </View>
-    </>
+    </Provider>
   );
 };
 export default KidsProfileedits;

@@ -1,130 +1,9 @@
-// import React from 'react';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-// import {Alert, Image, StyleSheet} from 'react-native';
-// import {MainStackNavigator, ContactStackNavigator} from './StackNavigator';
-// import Home from '../screens/Home';
-// import Achievement from '../screens/Achievment';
-// import Habits from '../screens/Habits';
-// import SelfProfile from '../screens/Selfprofile';
-// import Homekidsprofile from '../screens/HomeKidsProfile';
-// import PATH from '../constants/imagePath';
-// const Tab = createBottomTabNavigator();
-// const BottomTabNavigator = () => {
-//   return (
-//     <Tab.Navigator screenOptions={{headerShown:false}} >
-//       <Tab.Screen
-//         name="Home"
-//         component={Home}
-//         options={({route}) => ({
-//           tabBarIcon: ({focused}) => (
-//             <Image
-//               source={PATH.HomeScreenTab}
-//               style={focused ? styles.selectedTabImg : styles.tabImg}
-//             />
-//           ),
-//           tabBarButton:({})
-//         })}
-//       />
-//       <Tab.Screen
-//         name=" Achievement"
-//         component={Achievement}
-//         options={({route}) => ({
-//           tabBarIcon: ({focused}) => (
-//             <Image
-//               source={PATH.Achievementtab}
-//               style={focused ? styles.selectedTabImg2 : styles.tabImg2}
-//             />
-//           ),
-//         })}
-//       />
-//       <Tab.Screen
-//         name="Habits"
-//         component={Habits}
-//         options={({route}) => ({
-//           tabBarIcon: ({focused}) => (
-//             <Image
-//               source={PATH.Habittab}
-//               style={focused ? styles.selectedTabImg2 : styles.tabImg2}
-//             />
-//           ),
-//         })}
-//       />
-//       <Tab.Screen
-//         name="SelfProfile"
-//         component={SelfProfile}
-//         options={({route}) => ({
-//           tabBarIcon: ({focused}) => (
-//             <Image
-//               source={PATH.Selfprofiletab}
-//               style={focused ? styles.selectedTabImg3 : styles.tabImg3}
-//             />
-//           ),
-//         })}
-//       />
-//       <Tab.Screen
-//         name="Homekidsprofile"
-//         component={Homekidsprofile}
-//         options={({route}) => ({
-//           tabBarIcon: ({focused}) => (
-//             <Image
-//               source={PATH.KidsProfiletab}
-//               style={focused ? styles.selectedTabImg3 : styles.tabImg3}
-//             />
-//           ),
-//         })}
-//       />
-//     </Tab.Navigator>
-//   );
-// };
-
-// export default BottomTabNavigator;
-
-// const styles = StyleSheet.create({
-//   tabImg: {
-//     alignSelf: 'center',
-//     // tintColor: 'grey',
-//   },
-//   selectedTabImg: {
-//     alignSelf: 'center',
-//     // tintColor: 'red',
-//   },
-//   tabImg2: {
-//     alignSelf: 'center',
-//     // tintColor: 'grey',
-//     height: 25,
-//     width: 30,
-//   },
-//   selectedTabImg2: {
-//     alignSelf: 'center',
-//     // tintColor: '#0097F1',
-//     height: 25,
-//     width: 30,
-//   },
-//   tabImg3: {
-//     alignSelf: 'center',
-//     // tintColor: 'grey',
-//     height: 25,
-//     width: 25,
-//   },
-//   selectedTabImg3: {
-//     alignSelf: 'center',
-//     // tintColor: '#0097F1',
-//     height: 25,
-//     width: 25,
-//   },
-// });
-
-// // export default BottomTabNavigator
-
-
-
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useRef } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View ,Image} from 'react-native'
 import Icon, { Icons } from '../component/Icons';
 import Colors from '../constants/Colors';
-// import ColorScreen from '../screens/ColorScreen';
 import * as Animatable from 'react-native-animatable';
 import Home from '../screens/Home';
 import Achievement from '../screens/Achievment';
@@ -182,7 +61,7 @@ const TabButton = (props) => {
             ref={circleRef}
             style={styles.circle} />
             <Image source={item.icon}  style={{ colors:focused ? Colors.white : Colors.primary}} ></Image>
-          {/* <Icon type={item.type} name={item.icon} color={focused ? Colors.white : Colors.primary} /> */}
+          
         </View>
         <Animatable.Text
           ref={textRef}
@@ -225,10 +104,7 @@ const styles = StyleSheet.create({
   tabBar: {
     height: 70,
     position: 'absolute',
-    // bottom: 16,
-    // right: ,
-    // left: 5,
-    // borderRadius: 16,
+ 
   },
   btn: {
     width: 50,

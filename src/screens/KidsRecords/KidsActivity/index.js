@@ -29,7 +29,7 @@ const KidsActivity = ({navigation}) => {
     }
     const renderItem=({item,index})=>{
         return(
-        <View style={{borderWidth:1,borderColor:item.borderColor,padding:5,borderRadius:6,width:widthPercentageToDP('12%'),margin:'1%',alignItems:'center'}}>
+        <View style={{borderWidth:1,borderColor:item.borderColor,padding:5,borderRadius:6,width:widthPercentageToDP('12%'),margin:'1%',alignItems:'center',height:heightPercentageToDP('7%')}}>
             <TouchableOpacity onPress={()=>openModal(item)}>
         <Text style={{color:'black'}}>{item.day}</Text>
         <Text style={{color:'black'}}>{item.date}</Text>
@@ -77,7 +77,7 @@ const KidsActivity = ({navigation}) => {
             <View style={{ marginTop: heightPercentageToDP('-120%') }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                     <View style={{ margin: '5%' }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>navigation.goBack()}>
                             <Image source={Path.Backbutton}></Image>
                         </TouchableOpacity>
                     </View>

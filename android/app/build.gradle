@@ -79,7 +79,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -200,7 +200,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics';
     implementation 'com.android.support:multidex:2.0.1'
-
+   // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+   implementation 'com.facebook.fresco:fresco:2.0.0';
+   implementation 'com.facebook.fresco:animated-gif:2.6.0';
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

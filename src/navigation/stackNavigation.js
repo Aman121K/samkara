@@ -30,6 +30,7 @@ import KidsRewards from '../screens/KidsRecords/KidsRewards';
 import ReportsAndActivity from '../screens/KidsRecords/ReportsAnalytics';
 import Habitsdetails from '../screens/Habits/HabitsDetails/index';
 import Splash from '../screens/AuthScreen/Splash';
+import kidsBottomtab from './kidsBottomtab';
 
 const Stack = createStackNavigator();
 const Stacks = () => {
@@ -66,6 +67,7 @@ const Stacks = () => {
         <Stack.Screen name ="KidsHomeScreen" component={KidsHomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name ="KidsRewards" component={KidsRewards} options={{headerShown:false}}/>
         <Stack.Screen name ="ReportsAndActivity" component={ReportsAndActivity} options={{headerShown:false}}/>
+        <Stack.Screen name ="kidsBottomtab" component={kidsBottomtab} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

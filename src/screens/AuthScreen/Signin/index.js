@@ -223,7 +223,7 @@ you are login first time  </Text>
                 </View>
 
                         <View style={buttonColor ? { margin: '5%', backgroundColor: '#2D928D', padding: 13, alignItems: 'center', borderRadius: 6 } : { margin: '5%', backgroundColor: '#A7CECB', padding: 13, alignItems: 'center', borderRadius: 6 }}>
-                            <TouchableOpacity onPress={() =>navigation.navigate('KidsHomeScreen')}>
+                            <TouchableOpacity onPress={() =>navigation.navigate('kidsBottomtab')}>
                                 <View>
                                     <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>Login</Text>
                                 </View>

@@ -16,7 +16,7 @@ const AchievementDetails = ({navigation}) => {
         <View>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                 <TouchableOpacity style={{margin:heightPercentageToDP('2%')}} onPress={()=>navigation.goBack()}>
-                <Image source={Path.Backbutton} style={{alignSelf:'center'}}></Image>
+                <Image source={Path.Backbutton} resizeMode="center" style={{alignSelf:'center'}}></Image>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>
                 <Image source={Path.Notification} style={{alignSelf:'center'}}></Image>

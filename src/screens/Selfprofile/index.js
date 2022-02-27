@@ -82,7 +82,7 @@ const SelfProfile = ({ navigation }) => {
   return (
     <>
     <BackgroundTheme/>
-    <ScrollView style={{ marginTop:heightPercentageToDP('-120%') }}>
+    <ScrollView style={{ marginTop:heightPercentageToDP('-120%') }} showsVerticalScrollIndicator={false}>
     <View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: '5%', alignItems: 'center' }}>
 

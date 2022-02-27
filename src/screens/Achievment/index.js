@@ -48,7 +48,7 @@ const Achievment = ({navigation}) => {
         <View style={{marginTop:heightPercentageToDP('-120%')}}>
             <TouchableOpacity style={{margin:heightPercentageToDP('2%')}} onPress={()=>navigation.goBack()} >
             <View>
-                <Image source={Path.Backbutton}></Image>
+                <Image source={Path.Backbutton} resizeMode="center"></Image>
             </View>
             </TouchableOpacity>
             <View style={{marginLeft:'4%'}}>

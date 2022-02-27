@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import {ImageBackground, View,Image,Text} from 'react-native'
 import { heightPercentageToDP } from '../../../utility';
+import * as Utility from '../../../utility';
 // import GifImage from '@lowkey/react-native-gif';
 const Splash = ({navigation}) => {
     useEffect(() => {
         timeoutHandle = setTimeout(() => {
           retrieveData();
+          
         }, 1000);
       }, []);
       const retrieveData = async () => {
+        await Utility.setInLocalStorge('taskAssign','')
         navigation.navigate('Onboarding')
       };
   return <View>

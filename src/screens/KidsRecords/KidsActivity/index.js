@@ -78,7 +78,7 @@ const KidsActivity = ({navigation}) => {
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
                     <View style={{ margin: '5%' }}>
                         <TouchableOpacity onPress={()=>navigation.goBack()}>
-                            <Image source={Path.Backbutton}></Image>
+                            <Image source={Path.Backbutton} resizeMode="center"></Image>
                         </TouchableOpacity>
                     </View>
 

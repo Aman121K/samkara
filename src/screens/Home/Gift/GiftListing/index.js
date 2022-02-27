@@ -68,7 +68,9 @@ const SelectGift = ({navigation}) => {
         return (
             <TouchableOpacity style={{backgroundColor: 'white',borderRadius:6,padding:10,width:widthPercentageToDP('43%'),margin:widthPercentageToDP('2%')}} onPress={()=>giftSelected(item)}>
                     <View >
-                        {item.status?<Image source={require('../../../../assets/rcheck.png')} style={{alignSelf:'flex-end'}}></Image>:null}
+                        {item.status?
+                        <View style={{height:heightPercentageToDP('3%')}}>
+                        <Image source={require('../../../../assets/rcheck.png')} style={{alignSelf:'flex-end'}}></Image></View>:<View style={{height:heightPercentageToDP('3%')}}><Text style={{color:'white'}}>Frame</Text></View>}
                         <View style={{backgroundColor:'#F2F2F2'}}>
                             <Image source={item.image} resizeMode="center" style={{alignSelf:'center'}}></Image>
                             </View>
@@ -90,7 +92,7 @@ const SelectGift = ({navigation}) => {
             <View style={{ flexDirection: 'row',  justifyContent:'space-between'}}>
                 <TouchableOpacity style={{alignSelf:'center',marginLeft:10}} onPress={()=>navigation.goBack()}>
                 <View >
-                    <Image source={Path.Backbutton} ></Image>
+                    <Image source={Path.Backbutton} resizeMode="center"></Image>
                 </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>
@@ -110,7 +112,7 @@ const SelectGift = ({navigation}) => {
                 numColumns={2}
             />
             </View>
-            <TouchableOpacity style={{width:'85%',backgroundColor:'#A7CECB',padding:15,borderRadius:6,margin:'7.5%'}} onPress={()=>Choosegift()}>
+            <TouchableOpacity style={{width:'90%',backgroundColor:'#A7CECB',padding:15,borderRadius:6,margin:'5%'}} onPress={()=>Choosegift()}>
             <View >
                     <Text style={{fontWeight:'bold',fontSize:16,color:'white',alignSelf:'center'}}>Confirmed</Text>
             </View>

@@ -82,7 +82,7 @@ const KidsProfileShow = ({navigation}) => {
       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 <TouchableOpacity style={{margin:'3%'}} onPress={()=>navigation.goBack()}>
   <View>
-    <Image source={Path.Backbutton}></Image>
+    <Image source={Path.Backbutton} resizeMode="center"></Image>
   </View>
 </TouchableOpacity>
           <TouchableOpacity style={{margin:'3%'}} onPress={()=>navigation.navigate('KidsProfileedits')}>

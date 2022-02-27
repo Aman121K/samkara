@@ -60,7 +60,7 @@ const TabButton = (props) => {
           <Animatable.View
             ref={circleRef}
             style={styles.circle} />
-            <Image source={item.icon}  style={{ colors:focused ? Colors.white : Colors.primary}} ></Image>
+            <Image source={item.icon} resizeMode="center" style={{ colors:focused ? Colors.white : Colors.primary}} ></Image>
           
         </View>
         <Animatable.Text
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabBar: {
-    height: 70,
+    height: 50,
     position: 'absolute',
  
   },
   btn: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 25,
     borderWidth: 4,
     borderColor: Colors.white,

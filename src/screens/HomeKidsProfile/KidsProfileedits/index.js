@@ -1,9 +1,8 @@
 
 import React,{useState} from 'react';
-import {View, Text, Image, ScrollView,FlatList, TouchableOpacity,TextInput} from 'react-native';
+import {View, Text, Image, ScrollView,FlatList, TouchableOpacity,TextInput,StyleSheet} from 'react-native';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import Path from '../../../constants/imagePath';
-import DropDown from "react-native-paper-dropdown";
 import {
     Appbar,
     DarkTheme,
@@ -15,11 +14,14 @@ import {
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from '../../../utility';
 import { heightPercentageToDP, widthPercentageToDP } from '../../../utility';
 import DatePicker from 'react-native-date-picker'
+import { Dropdown } from 'react-native-element-dropdown';
+import ImagePicker from 'react-native-image-crop-picker';
 const KidsProfileedits = ({navigation}) => {
     const [gender, setGender] = useState();
     const [showDropDown, setShowDropDown] = useState(false);
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
+    const [filePath, setFilePath] = useState();
     const [newdate,setNewDate]=useState('');
     const genderList = [
       {
@@ -86,10 +88,7 @@ const KidsProfileedits = ({navigation}) => {
             id: 7,
             name: 'Piano'
         },
-    ])
-
-   
-     
+    ])  
     const renderItem = ({ item,index }) => {
         return (
             <TouchableOpacity  >
@@ -105,25 +104,34 @@ const KidsProfileedits = ({navigation}) => {
         const updateProfileAPi=()=>{
             
         }
+        const openGallary=()=>{
+            ImagePicker.openPicker({
+              width: 300,
+              height: 400,
+              cropping: true
+            }).then(image => {
+              setFilePath(image.path);
+              console.log(image);
+            });
+          }
   return (
       <Provider>
+    <ScrollView>
       <BackgroundTheme/>
-    <View style={{marginTop:'-230%'}}>
-      <ScrollView>
-         
+    <View style={{marginTop:hp('-118%')}}>
         <View style={{alignItems:'center',flexDirection:'row'}}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-            <Image source={Path.Backbutton} style={{marginLeft:10}}></Image>
+            <Image source={Path.Backbutton} resizeMode="center" style={{marginLeft:10}}></Image>
             </TouchableOpacity>
           <Text style={{fontSize:22,fontWeight:'bold',color:'black',marginLeft:widthPercentageToDP('30%')}}>Kids Profile</Text>
         </View>
         <View style={{alignItems:'center',margin:'2%'}}>
+            {filePath?<Image source={{uri:filePath}} style={{height: 100, width: 100, borderRadius: 50}}></Image>:
           <Image
             source={Path.Zaya}
-            style={{height: 100, width: 100, borderRadius: 50}}></Image>
+            style={{height: 100, width: 100, borderRadius: 50}}></Image>}
           <View style={{top:-20}}>
-             <TouchableOpacity  onPress={() => chooseFile('photo')}>
-              
+             <TouchableOpacity  onPress={() => openGallary()}>
            <Image source={Path.Camera} style={{tintColor:'white',height:20,width:20,marginLeft:40}}></Image>
            </TouchableOpacity>
            </View>
@@ -176,21 +184,25 @@ const KidsProfileedits = ({navigation}) => {
           setOpen(false)
         }}
       />
-                  
-               
-                <View style={{width:wp('45%'),}}>
-                    <DropDown
-                    
-                    // dropDownStyle={{backgroundColor:'red'}}
-              label={"Gender"}
-              mode={"flat"}
-              visible={showDropDown}
-              showDropDown={() => setShowDropDown(true)}
-              onDismiss={() => setShowDropDown(false)}
-              value={gender}
-              setValue={setGender}
-              list={genderList}
-            />
+                <View style={{width:wp('45%'),top:'2%'}}>
+                <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={genderList}
+        // search
+        maxHeight={150}
+        labelField="label"
+        valueField="value"
+        placeholder="Gender*"
+        searchPlaceholder="Search..."
+        value={gender}
+        onChange={item => {
+          setGender(item.value);
+        }}
+      />
             </View>
 
             </View>
@@ -210,9 +222,51 @@ const KidsProfileedits = ({navigation}) => {
                     <Text  style={{color:'white',fontSize:20,fontWeight:'900'}}>Update Profile</Text>
             </TouchableOpacity>
             </View>
-      </ScrollView>
+     
     </View>
+    </ScrollView>
     </Provider>
   );
 };
 export default KidsProfileedits;
+
+const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'white',
+      padding: 16,
+    },
+    dropdown: {
+      height: 50,
+      borderColor: 'gray',
+      // borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+      backgroundColor:'white'
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      backgroundColor: 'white',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
+    },
+  });

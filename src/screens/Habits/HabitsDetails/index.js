@@ -57,7 +57,7 @@ const HabbitsDetails = ({ navigation }) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: heightPercentageToDP('2%') }}>
                 <View style={{marginLeft:10}}>
                     <TouchableOpacity onPress={()=>navigation.goBack()}>
-                        <Image source={Path.Backbutton} ></Image>
+                        <Image source={Path.Backbutton} resizeMode="center"></Image>
                     </TouchableOpacity>
                 </View>
                 <View>

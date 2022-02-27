@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import { View, Text, ScrollView, Image, ImageBackground, Button, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react'
+import { View, Text, ScrollView, Image, ImageBackground, Button, TouchableOpacity ,FlatList,Share} from 'react-native';
 import Path from '../../constants/imagePath';
 import Modal from "react-native-modal";
 import  openDrawer  from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native';
 import BackgroundTheme from '../../component/backgroundtheme';
-import { heightPercentageToDP, widthPercentageToDP } from '../../utility';
+import ProgressCircle from 'react-native-progress-circle'
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from '../../utility';
+import * as Utility from '../../utility/index';
 const Home = ({ navigation ,route}) => {
-    // console.log("gfhgf",route.params.itemID)
-    // const {itemID}=route.params;
-    // console.log("Values got it ...",itemID);
-   
     const [like,setLike]=useState(104);
+    const [userTask,setUserTask]=useState();
+    const [isProfile,setIsProfile]=useState(false);
     const [homeHabbit, setHomeHabbit] = useState([
         { id: 'Swimming', image: Path.Swimming, title: 'Malesuada eros ipsum integer nisi suspen....', display: true },
         { id: 'Healthy Eating', image: Path.Eating, title: 'Malesuada eros ipsum integer nisi suspen....', display: true },
@@ -30,15 +30,68 @@ const Home = ({ navigation ,route}) => {
     const counFunction=()=>{
         setLike(like+1);
     }
+    const [date,setDate]=useState([
+        {id:1,day:'Sun',date:'17',borderColor:'green',value:100},
+        {id:2,day:'Mon',date:'18',borderColor:'red',value:70},
+        {id:3,day:'Tue',date:'19',borderColor:'black',value:60},
+        {id:4,day:'Wed',date:'20',borderColor:'AF010A',value:40},
+        {id:5,day:'Thr',date:'21',borderColor:'484C76',value:100},
+        {id:6,day:'Fri',date:'22',borderColor:'green',value:30},
+        {id:7,day:'Sat',date:'22',borderColor:'green',value:90},
+    ])
+    useEffect(()=>{
+        getData();
+    
+    },[])
+    const getData= async()=>{
+        var task=await Utility.getFromLocalStorge('taskAssign');
+        setUserTask(task);
+    }
+    const renderItem1=({item,index})=>{
+        return(
+            <View style={{borderWidth:1,borderColor:item.borderColor,padding:5,borderRadius:6,width:wp('12%'),margin:'1%',alignItems:'center',height:hp('7%')}}>
+            <TouchableOpacity >
+        <Text style={{color:'black'}}>{item.day}</Text>
+        <Text style={{color:'black'}}>{item.date}</Text>
+        </TouchableOpacity>
+        </View>
+        )
+    }
+    const logout=()=>{
+        setIsProfile(false);
+        navigation.navigate('Signin');
+    }
+    const shareApp= async()=>
+    {
+        setIsProfile(false);
+            try {
+              const result = await Share.share({
+                message:
+                  'React Native | A framework for building native apps using React',
+              });
+              if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                  // shared with activity type of result.activityType
+                } else {
+                  // shared
+                }
+              } else if (result.action === Share.dismissedAction) {
+                // dismissed
+              }
+            } catch (error) {
+              alert(error.message);
+            }
+        }
     return (
         <View>
             <ScrollView style={{ backgroundColor: '#CDE5E4' }} showsVerticalScrollIndicator={false}>
                 <BackgroundTheme />
-                <View style={{ marginTop: heightPercentageToDP('-120%'), width: '100%' }}>
+                <View style={{ marginTop: hp('-120%'), width: '100%' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ margin: '5%', flexDirection: 'row' }}>
                             <View>
-                                <TouchableOpacity onPress={()=> navigation.openDrawer()}>
+                                {/* <TouchableOpacity onPress={()=> navigation.openDrawer()}> */}
+                                <TouchableOpacity onPress={()=>setIsProfile(true)}>
                                     <Image source={Path.Zaya} style={{ width: 40, height: 40 }}></Image>
                                 </TouchableOpacity>
                             </View>
@@ -47,7 +100,7 @@ const Home = ({ navigation ,route}) => {
 
                         <View style={{ alignItems: 'center', top: -15 }}>
                             <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-                                <Image source={Path.Notification} style={{ alignSelf: 'center' }}></Image>
+                                <Image source={Path.Notification}  style={{ alignSelf: 'center' }}></Image>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -60,12 +113,13 @@ const Home = ({ navigation ,route}) => {
                             </View>
                         </ImageBackground>
                     </View>
+                 {!userTask?
+                 <>
                     <View style={{ marginLeft: '5%' }}>
                         <Text style={{ color: '#484C76', fontSize: 18, fontWeight: '700' }}>Now Pick Habits For Your Kids</Text>
                     </View>
-                    {/* {homeHabbit.map((item, index) => ( */}
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', margin: '2%' }}>
-                        {/* <TouchableOpacity onPress={()=>toggleModal()}> */}
+                        
                         <View style={{ backgroundColor: 'white', width: '45%', padding: 10, borderRadius: 10 }}>
                             <Text style={{ color: '#484C76', fontWeight: '500', fontSize: 13 }}>$35</Text>
                             <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -73,7 +127,7 @@ const Home = ({ navigation ,route}) => {
                             </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}>Swimming</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: hp('2%') }}>
                                 <TouchableOpacity>
                                 <Image source={Path.Homeuser}></Image>
                                 </TouchableOpacity>
@@ -85,7 +139,7 @@ const Home = ({ navigation ,route}) => {
                             </View>
 
                         </View>
-                        {/* </TouchableOpacity> */}
+                        
                         <View style={{ backgroundColor: 'white', width: '45%', padding: 10, borderRadius: 10 }}>
                             <Text style={{ color: '#484C76', fontWeight: '500', fontSize: 13 }}>$35</Text>
                             <TouchableOpacity onPress={() => setModalVisible(true)}>
@@ -93,7 +147,7 @@ const Home = ({ navigation ,route}) => {
                             </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}>Healthy Eating</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: hp('2%') }}>
                                 <Image source={Path.Homeuser} ></Image>
                                 <Text style={{ color: 'black' }}>105</Text>
                                 <Image source={Path.Homelike}></Image>
@@ -109,7 +163,7 @@ const Home = ({ navigation ,route}) => {
                             </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}> Swimming</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: hp('2%') }}>
                                 <Image source={Path.Homeuser}></Image>
                                 <Text style={{ color: 'black' }}>104</Text>
                                 <Image source={Path.Homelike}></Image>
@@ -123,7 +177,7 @@ const Home = ({ navigation ,route}) => {
                             </TouchableOpacity>
                             <Text style={{ color: 'black', fontSize: 13, fontWeight: '700' }}>Healthy Eating</Text>
                             <Text style={{ color: 'black', fontSize: 12, fontWeight: '500' }}>Malesuada eros ipsum integer nisi suspen....</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: heightPercentageToDP('2%') }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: hp('2%') }}>
                                 <Image source={Path.Homeuser}></Image>
                                 <Text style={{ color: 'black' }}>104</Text>
                                 <Image source={Path.Homelike}></Image>
@@ -131,11 +185,71 @@ const Home = ({ navigation ,route}) => {
                             </View>
                         </View>
                     </View>
+                    </>:
+                   <>
+                   <View style={{marginLeft:'5%'}}>
+                       <Text style={{ color: '#484C76', fontSize: 18, fontWeight: '700' }}>Current Activity</Text>
+                   </View>
+                      <View style={{margin:'4%',backgroundColor:'white',padding:10,borderRadius:10}}>
+                <TouchableOpacity>
+                <View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
+                    <View>
+                        <Image source={Path.Zaya} style={{height:30,width:30}}></Image>
+                    </View>
+                    <View style={{marginRight:'30%'}}>
+                        <Text style={{fontSize:16,fontWeight:'500',color:'black'}}>Zyan Smith</Text>
+                        </View>
+                        <View>
+                        <ProgressCircle
+            percent={10}
+            radius={25}
+            borderWidth={3}
+            color={'#D26F83'}
+            shadowColor="white"
+            bgColor="white"
+        >
+            <Text style={{ fontSize: 12,color:'black' }}>10 %</Text>
+        </ProgressCircle>
+                        </View>
+                        <View>
+                        <Image source={Path.ThreeOne}></Image>
+                        </View>
+                </View>
+                <View style={{margin:'2%'}}>
+                <FlatList
+                             data={date}
+                             renderItem={renderItem1}
+                             keyExtractor={item => item.id}
+                              numColumns={date.length}
+                             contentContainerStyle={{ flexGrow: 1 }}
+                             scrollEnabled={false}
+                           
+                            >
+
+                            </FlatList>
+     
+                </View>
+                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                    <View>
+                        <Text style={{fontSize:14,fontWeight:'500',color:'black'}}>Drinking Water</Text>
+                    </View>
+                    <View style={{flexDirection:'row'}}>
+                        <TouchableOpacity>
+                        <View>
+                            <Image source={Path.pause}></Image>
+                        </View>
+                        </TouchableOpacity>
+                        <View style={{marginLeft:10}}><Text style={{fontSize:10,fontWeight:'400',color:'#484C76'}}>Stop</Text></View>
+                    </View>
+                </View>
+                </TouchableOpacity>
+            </View></>
+                    }
                     <View>
                         <Text style={{ color: '#484C76', marginLeft: '5%', fontSize: 18, fontWeight: '700',top:5 }}>Trending Habits</Text>
                     </View>
                     <TouchableOpacity onPress={()=> navigation.navigate("Habbitsone")}>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, marginTop: heightPercentageToDP('2%'), borderRadius: 10,width:widthPercentageToDP('90%'),alignSelf:'center' }}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, marginTop: hp('2%'), borderRadius: 10,width:wp('90%'),alignSelf:'center' }}>
                         <View style={{ backgroundColor: '#FFBF7F' }}>
                             <Text>.</Text>
                         </View>
@@ -153,7 +267,7 @@ const Home = ({ navigation ,route}) => {
                     </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=> navigation.navigate("Habbitsone")}>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, margin: '5%', marginTop: heightPercentageToDP('2%'), borderRadius: 10,width:widthPercentageToDP('90%'),alignSelf:'center' ,marginBottom:heightPercentageToDP('12%')}}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, margin: '5%', marginTop: hp('2%'), borderRadius: 10,width:wp('90%'),alignSelf:'center' ,marginBottom:hp('12%')}}>
                         <View style={{ backgroundColor: '#FFBF7F' }}>
                             <Text>.</Text>
                         </View>
@@ -223,6 +337,48 @@ const Home = ({ navigation ,route}) => {
                             </View>
                         </View>
                     </Modal>
+
+                    <Modal isVisible={isProfile} onRequestClose={() => {setIsProfile(false)}}>
+                            <View style={{backgroundColor:'white',padding:10,borderRadius:10}}>
+                                <View style={{flexDirection:'row',alignItems:'center'}}>
+                                <TouchableOpacity onPress={()=>setIsProfile(false)}>
+                               <Image source={Path.Cross}></Image>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{marginLeft:wp('20%')}}>
+                                <Text style={{fontSize:20,fontWeight:'bold'}}>Samskara</Text>
+                                </TouchableOpacity>
+                                </View>
+                                <View style={{flexDirection:'row',alignItems:'center'}}>
+                <View>
+                    <Image source={Path.Zaya} resizeMode="center"></Image>
+                </View>
+                <View>
+                    <Text style={{fontSize:16,fontWeight:'700',lineHeight:22,color:'black'}}>John Doe</Text>
+                    <Text style={{fontSize:16,fontWeight:'bold',lineHeight:22}}>$100</Text>
+                    </View>
+          </View>
+          <TouchableOpacity onPress={()=>shareApp()}>
+          <View style={{flexDirection:'row',margin:wp('3%')}}>
+              <View>
+                    <Image source={Path.Share}></Image>
+              </View>
+              <View style={{marginLeft:wp('3%')}}>
+                    <Text style={{fontSize:14,fontWeight:'700'}}>Invite friends</Text>
+              </View>
+          </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>logout()}>
+          <View style={{flexDirection:'row',margin:wp('3%')}}>
+              <View>
+              <Image source={Path.Logout}></Image>
+              </View>
+              <View style={{marginLeft:wp('3%')}}>
+                <Text style={{fontSize:14,fontWeight:'700'}}>Logout</Text>
+              </View>
+          </View>
+          </TouchableOpacity>
+                            </View>
+                </Modal>
 
 
                 </View>

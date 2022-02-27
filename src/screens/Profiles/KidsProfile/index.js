@@ -4,10 +4,7 @@ import { View, Text, TextInput, Image, TextInputComponent, FlatList, StyleSheet,
 // import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Path from '../../../constants/imagePath';
 import path from '../../../constants/imagePath';
-import {
-    launchCamera,
-    launchImageLibrary
-} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import {
     Appbar,
     DarkTheme,
@@ -19,7 +16,7 @@ import {
 import Constants from '../../../constants/Colors';
 import BackgroundTheme from '../../../component/backgroundtheme';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from '../../../utility';
-import DropDown from "react-native-paper-dropdown";
+import { Dropdown } from 'react-native-element-dropdown';
 import DatePicker from 'react-native-date-picker'
 
 const KidsProfile = ({ navigation }) => {
@@ -183,37 +180,14 @@ const KidsProfile = ({ navigation }) => {
     }
 
     const chooseFile = (type) => {
-        let options = {
-            mediaType: type,
-            maxWidth: 300,
-            maxHeight: 550,
-            quality: 1,
-        };
-        launchImageLibrary(options, (response) => {
-            console.log('Response = ', response);
-
-            if (response.didCancel) {
-                alert('User cancelled camera picker');
-                return;
-            } else if (response.errorCode == 'camera_unavailable') {
-                alert('Camera not available on device');
-                return;
-            } else if (response.errorCode == 'permission') {
-                alert('Permission not satisfied');
-                return;
-            } else if (response.errorCode == 'others') {
-                alert(response.errorMessage);
-                return;
-            }
-            console.log('base64 -> ', response.base64);
-            console.log('uri -> ', response.assets.uri);
-            console.log('width -> ', response.width);
-            console.log('height -> ', response.height);
-            console.log('fileSize -> ', response.fileSize);
-            console.log('type -> ', response.type);
-            console.log('fileName -> ', response.fileName);
-            setFilePath(response.assets.uri);
-        });
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+          }).then(image => {
+            setFilePath(image.path);
+            console.log(image);
+          });
     };
 
     return (
@@ -226,9 +200,10 @@ const KidsProfile = ({ navigation }) => {
                         <Text style={{ fontSize: 20, fontWeight: '900', color: '#484C76' }}>Kids Profile</Text>
                     </View>
                     <View style={{ alignSelf: 'center', margin: '2%' }}>
-                        <Image source={Path.ProfileLogo} style={{ height: 100, width: 100 }}></Image>
+                        {filePath?<Image source={{uri:filePath}} style={{height: 100, width: 100,borderRadius:50}}></Image>:
+                        <Image source={Path.ProfileLogo} style={{ height: 100, width: 100 }}></Image>}
                         <View style={{ top: -20 }}>
-                            <TouchableOpacity onPress={() => chooseFile('photo')}>
+                            <TouchableOpacity onPress={() => chooseFile()}>
                                 <Image source={Path.Camera} style={{ tintColor: 'white', height: 20, width: 20, alignSelf: 'flex-end', }}></Image>
                             </TouchableOpacity>
                         </View>
@@ -269,35 +244,32 @@ const KidsProfile = ({ navigation }) => {
                                 setOpen(false)
                             }}
                         />
-                        <View style={{ width: wp('45%') }}>
-                            <DropDown
-
-                                // dropDownStyle={{backgroundColor:'red'}}
-                                label={"Gender"}
-                                mode={"flat"}
-                                visible={showDropDown}
-                                showDropDown={() => setShowDropDown(true)}
-                                onDismiss={() => setShowDropDown(false)}
-                                value={gender}
-                                setValue={setGender}
-                                list={genderList}
-                            />
-                            {/* <TouchableOpacity style={{ marginLeft: '63%' }}>
-                            <Image source={require('../../../assets/Vector.png')} ></Image>
-                        </TouchableOpacity> */}
+                        <View style={{ width: wp('45%'),top:5 }}>
+                        <Dropdown
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
+        data={genderList}
+        // search
+        maxHeight={150}
+        labelField="label"
+        valueField="value"
+        placeholder="Gender*"
+        searchPlaceholder="Search..."
+        value={gender}
+        onChange={item => {
+          setGender(item.value);
+        }}
+      />
+                        
                         </View>
                     </View>
                     <View style={{ margin: '5%' }}>
                         <Text style={{ fontWeight: '500', fontSize: 17, color: 'black' }}>Select one or more areas where you want your kids to be better*</Text>
                     </View>
-                    {/* {habbits.map((item, index) => (
-
-                    <View key={index} style={{ margin: '3%', backgroundColor: 'white', padding: 10, borderRadius: 10, width: '30%' }}>
-                        <Text style={{flexWrap:'wrap'}}>{item.name}</Text>
-                    </View>
-
-                ))
-                } */}
+                  
                 <View style={{width:wp('95%'),marginLeft:wp('5%')}}>
                     <FlatList
                         data={habbits}
@@ -305,7 +277,6 @@ const KidsProfile = ({ navigation }) => {
                         keyExtractor={item => item.id}
                         numColumns={3}
                         scrollEnabled={false}
-                    // contentContainerStyle={{ flexGrow: 1 }}
                     />
                     </View>
                     <View style={{ margin: '5%' }}>
@@ -335,7 +306,7 @@ const KidsProfile = ({ navigation }) => {
                         </View>
                     </View>
 
-                    <View style={{ flexDirection: 'row', backgroundColor: 'white', width: wp('45%'), padding: 10, alignSelf: 'center', margin: hp('4%'), borderRadius: 6 }}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'white', width: wp('45%'), padding: 10, alignSelf: 'center', margin: hp('3%'), borderRadius: 6 }}>
                         <TouchableOpacity style={{ flexDirection: 'row', borderRadius: 6 }}>
                             <View>
                                 <Image source={Path.plusIcon} style={{ height: 20, width: 20, alignSelf: 'center', marginLeft: 5 }}></Image>
@@ -346,7 +317,7 @@ const KidsProfile = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ margin: hp('3%'), backgroundColor: '#A7CECB', padding: 13, alignItems: 'center', borderRadius: 6 }}>
+                    <View style={{ margin: hp('1%'), backgroundColor: '#A7CECB', padding: 13, alignItems: 'center', borderRadius: 6 }}>
                         <TouchableOpacity onPress={() => navigation.navigate('AllKidsprofile')}>
                             <Text style={{ color: 'white', fontSize: 20, fontWeight: '700' }}>Next</Text>
                         </TouchableOpacity>
@@ -362,53 +333,42 @@ const KidsProfile = ({ navigation }) => {
 export default KidsProfile;
 
 const styles = StyleSheet.create({
-
-    RegisterButton: {
-        width: wp('80%'),
-        height: hp('8%'),
-        backgroundColor: "pink",
-        borderColor: Constants.red,
-        borderWidth: 1,
-        alignSelf: 'center',
-        borderRadius: 10,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 20,
-        backgroundColor: Constants.transparent,
+    container: {
+      backgroundColor: 'white',
+      padding: 16,
     },
-    text:
-        { fontSize: 18, alignSelf: "center", color: Constants.red },
-
-    progress:
-    {
-        width: "85%",
-        alignSelf: "center",
-        marginTop: hp("5%"),
-        bottom: 0,
-        position: "absolute",
-        marginBottom: "5%"
-
+    dropdown: {
+      height: 50,
+      borderColor: 'gray',
+      // borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+      backgroundColor:'white'
     },
-    item: {
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        borderWidth: .5,
-        borderColor: "#CDE5E4",
-        margin: 2,
-        borderRadius: 5,
-        // width: wp("25%"),
-        // height: 45,
+    icon: {
+      marginRight: 5,
     },
-    head:
-        { width: "90%", alignSelf: "center", marginTop: 30, },
-    topin:
-        { marginTop: 40, alignSelf: "center" },
-    welcomeTxt: {
-        fontSize: 20,
-        fontWeight: '600',
-        width: wp('90%'),
-        textAlign: "center",
-        color: Constants.black,
-        marginTop: 30,
+    label: {
+      position: 'absolute',
+      backgroundColor: 'white',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
     },
-});
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
+    },
+  });

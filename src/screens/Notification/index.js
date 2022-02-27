@@ -50,7 +50,7 @@ const Notification = ({navigation}) => {
         <View  style={{marginTop:heightPercentageToDP('-120%')}}>
             <View style={{margin:heightPercentageToDP('3%')}}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
-                <Image source={Path.Backbutton}></Image>
+                <Image source={Path.Backbutton} resizeMode="center"></Image>
                 </TouchableOpacity>
             </View>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
